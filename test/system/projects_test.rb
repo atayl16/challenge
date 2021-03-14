@@ -39,7 +39,7 @@ class ProjectsTest < ApplicationSystemTestCase
   test "destroying a Project" do
     visit projects_url
     page.accept_confirm do
-      click_on "Destroy", match: :first
+      click_on "Delete", match: :first
     end
 
     assert_text "Project was successfully destroyed"

@@ -5,7 +5,8 @@ class ProjectsController < ApplicationController
     if params[:name]
       @projects = Project.where('name ILIKE ?', "%#{params[:name]}%")
     else
-      @projects = Project.all
+      @q = Project.ransack(params[:q])
+      @projects = @q.result.includes(:user)
     end
   end
 
