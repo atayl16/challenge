@@ -13,6 +13,9 @@ Turbolinks.start()
 ActiveStorage.start()
 
 require("bootstrap")
+require("trix")
+require("@rails/actiontext")
+
 import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/css/all"
 import "@fortawesome/fontawesome-free/js/all"
@@ -23,3 +26,6 @@ document.addEventListener("turbolinks:load", function() {
         $('[data-toggle="popover"]').popover()
     })
 })
+
+require("trix")
+require("@rails/actiontext")

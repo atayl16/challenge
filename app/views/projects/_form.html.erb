@@ -6,9 +6,10 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :description %>
-    <%= f.input :content %>
+    <%= f.label :content %>
+    <%= f.rich_text_area :content %>
   </div>
-
+<br>
   <div class="form-actions">
     <%= f.button :submit, "Save", class: "btn btn-success" %>
   </div>
