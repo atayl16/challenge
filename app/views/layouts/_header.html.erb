@@ -12,6 +12,12 @@
             Home
           <% end %>
         </li>
+        <li class="<%= 'active font-weight-bold' if current_page?(users_path) %> nav-item">
+          <%= link_to users_path, class: 'nav-link' do %>
+            <div class="fa fa-user"></div>
+            Users
+          <% end %>
+        </li>
         <li class="<%= 'active font-weight-bold' if current_page?(projects_path) %> nav-item">
           <%= link_to projects_path, class: 'nav-link' do %>
             <div class="fa fa-trophy"></div>

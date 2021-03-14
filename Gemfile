@@ -15,7 +15,7 @@ gem 'simple_form'
 gem 'image_processing', '~> 1.2'
 gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf80a632d3232c3f548ce7b95fd94b6eb2'
 gem 'devise-bootstrap-views', '~> 1.0'
-
+gem 'friendly_id', '~> 5.4.0'
 
 
 group :development, :test do
