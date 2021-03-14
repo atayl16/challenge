@@ -1,7 +1,11 @@
 require "test_helper"
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
+    get '/users/sign_in'
+    sign_in users(:fatima)
+    post user_session_url
     @project = projects(:one)
   end
 
@@ -17,7 +21,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create project" do
     assert_difference('Project.count') do
-      post projects_url, params: { project: { content: @project.content, description: @project.description, name: @project.name } }
+      post projects_url, params: { project: { name: @project.name, content: @project.content, user_id: @project.user_id } }
     end
 
     assert_redirected_to project_url(Project.last)
@@ -34,7 +38,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update project" do
-    patch project_url(@project), params: { project: { content: @project.content, description: @project.description, name: @project.name } }
+    patch project_url(@project), params: { project: { name: @project.name, content: @project.content, user_id: @project.user_id } }
     assert_redirected_to project_url(@project)
   end
 
