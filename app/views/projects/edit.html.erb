@@ -1,6 +1,10 @@
-<h1>Editing Challenge</h1>
-
-<%= render 'form', project: @project %>
-
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+<div class="card">
+  <h1 class="card-header">Editing Challenge</h1>
+  <div class="card-body">
+    <%= render 'form', project: @project %>
+    </div>
+  <div class="card-footer text-muted">
+    <%= link_to 'Show', @project %> |
+    <%= link_to 'Back', projects_path %>
+  </div>
+</div>

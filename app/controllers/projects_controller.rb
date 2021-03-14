@@ -3,7 +3,11 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    if params[:name]
+      @projects = Project.where('name ILIKE ?', "%#{params[:name]}%")
+    else
+      @projects = Project.all
+    end
   end
 
   # GET /projects/1 or /projects/1.json

@@ -1,4 +1,83 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<i class="far fa-address-book"></i>
-<i class="fab fa-github"></i>
+<div class="jumbotron">
+  <div class="display-4">
+    What new challenge will you take on today?
+  </div>
+  <div class="p-4"></div>
+  <div class="form-inline my-2 my-lg-0">
+    <%= form_tag(projects_path, method: :get) do %>
+      <div class="input-group">
+        <%= text_field_tag :name, params[:name], autocomplete: 'off', placeholder: "Search", class: 'form-control-sm' %>
+        <span class="input-group-append">
+          <button class="btn btn-primary btn-sm" type="submit">
+            <span aria-hidden="true" class="fa fa-search"></span>
+          </button>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="card-group">
+  <div class="card card-body">
+    <h1>
+      <div class="fa fa-trophy"></div>
+    </h1>
+    <%= Project.count %>
+    Online challenges
+    <div class="row"></div>
+    Explore a variety of fresh topics
+  </div>
+  <div class="card card-body">
+    <h1>
+      <div class="fa fa-user-ninja"></div>
+    </h1>
+    <%= Project.distinct.count(:user_id) %>
+    Challengers
+    <div class="row"></div>
+    Find challenges from friends or strangers
+  </div>
+  <div class="card card-body">
+    <h1>
+      <div class="fa fa-users"></div>
+    </h1>
+    <%= User.count %>
+    Active Participants
+    <div class="row"></div>
+    Join the community
+  </div>
+  <div class="card card-body">
+    <h1>
+      <div class="fa fa-infinity"></div>
+    </h1>
+    No time limts
+    <div class="row"></div>
+    Complete challenges any time
+  </div>
+</div>
+<hr/>
+<h2>
+  Popular challenges
+</h2>
+<div class="card-columns">
+  <% @projects.each do |project| %>
+    <%= render 'projects/project', project: project %>
+  <% end %>
+</div>
+<hr/>
+<h2>
+  Top rated challenges
+</h2>
+<div class="card-columns">
+  <% @projects.each do |project| %>
+    <%= render 'projects/project', project: project %>
+  <% end %>
+</div>
+<hr/>
+<h2>
+  Latest challenges
+</h2>
+<div class="card-columns">
+  <% @latest_projects.each do |project| %>
+    <%= render 'projects/project', project: project %>
+  <% end %>
+</div>
+<hr/>
