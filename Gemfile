@@ -13,6 +13,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'simple_form'
 gem 'image_processing', '~> 1.2'
+gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf80a632d3232c3f548ce7b95fd94b6eb2'
+gem 'devise-bootstrap-views', '~> 1.0'
+
 
 
 group :development, :test do
