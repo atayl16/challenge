@@ -31,6 +31,8 @@
         <%= role.name %>
       </div>
     <% end %>
-    <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning shiny' %>
+    <% if policy(user).edit? %>
+      <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning shiny' %>
+    <% end%>
   </div>
 </div>
