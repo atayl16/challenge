@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   def index
     @ransack_projects = Project.ransack(params[:projects_search], search_key: :projects_search)
-    @projects = @ransack_projects.result.includes(:user)
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
   end
 
   def show
