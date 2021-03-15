@@ -1,26 +1,35 @@
 <div class="row">
   <div class="col-md-2">
-    Search Challenges
-    <p></p>
-    <%= search_form_for @ransack_projects, as: :projects_search, url: projects_path do |f| %>
-      <%= f.search_field :name_cont, placeholder: 'Challenge Name', class: 'form-control form-control-sm' %>
-      <p></p>
-      <%= f.search_field :description_cont, placeholder: 'Description', class: 'form-control form-control-sm' %>
-      <p></p>
-      <%= f.search_field :content_cont, placeholder: 'Details', class: 'form-control form-control-sm' %>
-      <p></p>
-      <%= f.search_field :user_email_cont, placeholder: 'Challenger Email', class: 'form-control form-control-sm' %>
-      <p></p>
-      <%= f.button :submit, class: "btn shiny" do%>
-      <div class="fa fa-search"></div>
-      Search
-      <% end %>
-    <% end %>
-    <p></p>
-    <%= link_to projects_path, class: 'btn shiny' do %>
-      <div class="fa fa-sync-alt"></div>
-      Reset
-    <% end %>
+    <div class="card">
+      <div class="card-header">
+        <div class="fa fa-search"></div>
+        Search
+      </div>
+      <div class="card-body">
+        <%= search_form_for @ransack_projects, as: :projects_search, url: projects_path do |f| %>
+          <%= f.search_field :name_cont, placeholder: 'Name', class: 'form-control form-control-sm' %>
+          <p></p>
+          <%= f.search_field :description_cont, placeholder: 'Description', class: 'form-control form-control-sm' %>
+          <p></p>
+          <%= f.search_field :content_cont, placeholder: 'Details', class: 'form-control form-control-sm' %>
+          <p></p>
+          <%= f.search_field :user_email_cont, placeholder: 'Challenger', class: 'form-control form-control-sm' %>
+          <p></p>
+          <%= f.button :submit, class: "btn btn-sm shiny" do%>
+          <div class="fa fa-search"></div>
+          Search
+          <% end %>
+        <% end %>
+        <p></p>
+        <%= link_to projects_path, class: 'btn btn-sm shiny' do %>
+          <div class="fa fa-sync-alt"></div>
+          Reset
+        <% end %>
+      </div>
+      <div class="card-footer">
+        <%= link_to '+ New Challenge', new_project_path %>
+      </div>
+    </div>
   </div>
   <div class="col-md-10">
     <div class="card-columns">
@@ -31,5 +40,3 @@
   </div>
 </div>
 <br>
-
-<%= link_to 'New Challenge', new_project_path %>

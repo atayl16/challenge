@@ -17,8 +17,8 @@ gem 'devise', :git => "https://github.com/heartcombo/devise.git", ref: '8bb358cf
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'friendly_id', '~> 5.4.0'
 gem 'ransack'
-
-
+gem "rolify"
+gem "pundit"
 
 group :development, :test do
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
