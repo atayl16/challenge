@@ -1,17 +1,16 @@
 class User < ApplicationRecord
-  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
   has_many :projects
   validate :must_have_a_role, on: :update
+  after_create :assign_default_role
 
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :email, use: :slugged
   rolify
 
-  after_create :assign_default_role
 
   def assign_default_role
     if User.count == 1
