@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
   has_many :projects
+  has_many :enrollments
   validate :must_have_a_role, on: :update
   after_create :assign_default_role
 
@@ -20,6 +21,10 @@ class User < ApplicationRecord
     else
       self.add_role(:user) if self.roles.blank?
     end
+  end
+
+  def join_project(project)
+    self.enrollments.create(project: project)
   end
 
   private

@@ -15,4 +15,7 @@
     <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger shiny' %>
   </div>
   <% end %>
+  <div class="card-footer">
+    <%= enrollment_button(project) %>
+  </div>
 </div>

@@ -30,6 +30,12 @@
             New Challenge
           <% end %>
         </li>
+        <li class="<%= 'active font-weight-bold' if current_page?(enrollments_path) %> nav-item">
+          <%= link_to enrollments_path, class: 'nav-link' do %>
+            <div class="fa fa-lock-open"></div>
+            Enrollments
+          <% end %>
+        </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
         <%= search_form_for @ransack_projects, as: :projects_search, url: projects_path do |f| %>
@@ -57,6 +63,10 @@
             </b>
           </a>
           <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+            <%= link_to user_path(current_user), class: "dropdown-item" do %>
+              <div class="fa fa-user"></div>
+              <b>My profile</b>
+            <% end %>
             <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
               <div class="fa fa-cog"></div>
               <b>Account settings</b>

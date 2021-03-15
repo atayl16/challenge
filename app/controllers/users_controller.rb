@@ -4,15 +4,10 @@ class UsersController < ApplicationController
   def index
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true)
-
-    # @pagy, @users = pagy(@q.result(distinct: true).order(created_at: :desc))
-    #
-    # authorize @users
+    @pagy, @users = pagy(@q.result(distinct: true).order(created_at: :desc))
   end
 
   def show
-    # @courses_teaching = @user.courses
-    # @courses_learning = @user.enrollments.includes(:course)
   end
 
   def edit

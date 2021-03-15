@@ -1,0 +1,73 @@
+<table class="table table-bordered table-striped table-sm">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>
+        <div class="fa fa-user"></div>
+        User
+      </th>
+      <th>
+        <div class="fa fa-clock"></div>
+        <div class="fa fa-lock-open"></div>
+        joined
+      </th>
+      <th>
+        <div class="fa fa-graduation-cap"></div>
+        Challenge
+      </th>
+      <th>
+        <div class="text-warning fa fa-clock"></div>
+        Reviewed on
+      </th>
+      <th>
+        <div class="text-warning fa fa-star"></div>
+        Rating
+      </th>
+      <th>
+        <div class="text-warning fa fa-comment"></div>
+        Review
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @enrollments.each do |enrollment| %>
+      <tr>
+        <td>
+          <%= enrollment.id %>
+        </td>
+        <td>
+          <%= link_to enrollment.user.email, user_path(enrollment.user) %>
+        </td>
+        <td>
+          <%= enrollment.created_at.strftime("%d/%b/%Y, %H:%M") %>
+        </td>
+        <td>
+          <%= link_to enrollment.project.name, project_path(enrollment.project) %>
+        </td>
+        <td>
+          <% if enrollment.rating.present? %>
+            <%= enrollment.updated_at.strftime("%d/%b/%Y, %H:%M") %>
+          <% end %>
+        </td>
+        <td>
+          <%= enrollment.rating %>
+        </td>
+        <td>
+          <%= enrollment.review %>
+        </td>
+        <td>
+          <%= link_to 'See Review', enrollment %>
+        </td>
+        <td>
+          <%= link_to 'Add Review', edit_enrollment_path(enrollment) %>
+        </td>
+        <td>
+          <%= link_to 'Delete Enrollment', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
