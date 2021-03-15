@@ -1,13 +1,13 @@
 <div class="form-inline">
   <%= search_form_for @q do |f| %>
     <%= f.search_field :email_or_name_eq, placeholder: 'Email or Name' %>
-    <%= f.button :submit, class: "btn btn-secondary" do%>
+    <%= f.button :submit, class: "btn shiny" do%>
     <div class="fa fa-search"></div>
     Search
     <% end %>
   <% end %>
   <div class="ml-2"></div>
-  <%= link_to users_path, class: 'btn' do %>
+  <%= link_to users_path, class: 'btn shiny' do %>
     <div class="fa fa-sync-alt"></div>
     Reset
   <% end %>

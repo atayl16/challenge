@@ -2,12 +2,8 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
 
   def index
-    if params[:name]
-      @projects = Project.where('name ILIKE ?', "%#{params[:name]}%")
-    else
-      @q = Project.ransack(params[:q])
-      @projects = @q.result.includes(:user)
-    end
+    @ransack_projects = Project.ransack(params[:projects_search], search_key: :projects_search)
+    @projects = @ransack_projects.result.includes(:user)
   end
 
   def show

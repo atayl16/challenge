@@ -10,8 +10,8 @@
     Created by <%= project.user.email %> on <%= project.created_at.strftime('%b-%d-%Y') %>
   </div>
   <div class="card-footer">
-    <%= link_to 'View', project, class: 'btn btn-sm btn-primary' %>
-    <%= link_to 'Edit', edit_project_path(project), class: 'btn btn-sm btn-warning' %>
-    <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+    <%= link_to 'View', project, class: 'btn btn-sm btn-info shiny' %>
+    <%= link_to 'Edit', edit_project_path(project), class: 'btn btn-sm btn-warning shiny' %>
+    <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger shiny' %>
   </div>
 </div>
