@@ -2,5 +2,7 @@
 
 <%= render 'form', enrollment: @enrollment %>
 
-<%= link_to 'See Review', @enrollment %> |
-<%= link_to 'Back', enrollments_path %>
+<div class="btn-group" role="group">
+  <%= button_to 'See Review', @enrollment, :class => "btn shiny btn-success" %>
+  <%= button_to 'Back', enrollments_path, :class => "btn shiny btn-yellow" %>
+</div>

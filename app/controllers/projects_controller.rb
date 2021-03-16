@@ -2,8 +2,30 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
 
   def index
+    @ransack_path = projects_path
     @ransack_projects = Project.ransack(params[:projects_search], search_key: :projects_search)
     @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
+  end
+
+  def accepted
+    @ransack_path = accepted_projects_path
+    @ransack_projects = Project.joins(:enrollments).where(enrollments: {user: current_user}).ransack(params[:projects_search], search_key: :projects_search)
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
+    render 'index'
+  end
+
+  def pending_review
+    @ransack_path = pending_review_projects_path
+    @ransack_projects = Project.joins(:enrollments).merge(Enrollment.pending_review.where(user: current_user)).ransack(params[:projects_search], search_key: :projects_search)
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
+    render 'index'
+  end
+
+  def created
+    @ransack_path = created_projects_path
+    @ransack_projects = Project.where(user: current_user).ransack(params[:projects_search], search_key: :projects_search)
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
+    render 'index'
   end
 
   def show

@@ -18,8 +18,10 @@
   </div>
   <% if policy(project).edit? %>
   <div class="card-footer">
-    <%= link_to 'Edit', edit_project_path(project), class: 'btn btn-sm btn-palegreen text-white shiny' %>
-    <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-magenta text-white shiny' %>
+    <div class="btn-group" role="group" >
+      <%= button_to 'Edit' , edit_project_path(project), class: 'btn btn-sm btn-palegreen text-white shiny' %>
+      <%= button_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-magenta text-white shiny' %>
+    </div>
   </div>
   <% end %>
   <div class="card-footer">

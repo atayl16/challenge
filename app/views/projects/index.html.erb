@@ -6,7 +6,7 @@
         Search
       </div>
       <div class="card-body">
-        <%= search_form_for @ransack_projects, as: :projects_search, url: projects_path do |f| %>
+        <%= search_form_for @ransack_projects, as: :projects_search, url: @ransack_path do |f| %>
           <%= f.search_field :name_cont, placeholder: 'Name', class: 'form-control form-control-sm' %>
           <p></p>
           <%= f.search_field :description_cont, placeholder: 'Description', class: 'form-control form-control-sm' %>
@@ -21,7 +21,7 @@
           <% end %>
         <% end %>
         <p></p>
-        <%= link_to projects_path, class: 'btn btn-sm shiny' do %>
+        <%= link_to @ransack_path, class: 'btn btn-sm shiny' do %>
           <div class="fa fa-sync-alt"></div>
           Reset
         <% end %>

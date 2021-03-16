@@ -3,6 +3,7 @@
 <p>
   <strong>Name:</strong>
   <%= @project.name %>
+  <em><%= @project.duration %></em>
 </p>
 
 <p>
@@ -14,6 +15,7 @@
   <strong>Content:</strong>
   <%= @project.content %>
 </p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div class="btn-group" role="group">
+  <%= button_to 'Edit', edit_project_path(@project), :class => "btn shiny btn-palegreen" %>
+  <%= button_to 'Back', projects_path, :class => "btn shiny btn-yellow" %>
+</div>

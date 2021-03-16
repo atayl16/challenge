@@ -17,29 +17,23 @@
 <table class="table table-bordered table-striped table-sm table-hover">
   <thead>
     <tr>
-      <th>ID</th>
+      <th><%= sort_link(@q, :id) %></th>
       <th>
-        <div class="fa fa-user"></div>
         <%= sort_link(@q, :user_email) %>
       </th>
       <th>
-        <div class="fa fa-clock"></div>
         <%= sort_link(@q, :created_at) %>
       </th>
       <th>
-        <div class="fa fa-trophy"></div>
         <%= sort_link(@q, :project_name) %>
       </th>
       <th>
-        <div class="fa fa-clock"></div>
         <%= sort_link(@q, :updated_at) %>
       </th>
       <th>
-        <div class="fa fa-star"></div>
         <%= sort_link(@q, :rating) %>
       </th>
       <th>
-        <div class="fa fa-comment"></div>
         <%= sort_link(@q, :review) %>
       </th>
       <th></th>

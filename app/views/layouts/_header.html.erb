@@ -19,11 +19,14 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="usersDropdown">
             <%= link_to users_path, class: "dropdown-item" do %>
-              <div class="text-primary fa fa-users"></div>
+              <div class="fa fa-users"></div>
               <b>All Users</b>
+              <div class="badge badge-success">
+                <%= User.count %>
+              </div>
             <% end %>
             <%= link_to users_path, class: "dropdown-item" do %>
-              <div class="text-danger fa fa-user-friends"></div>
+              <div class="fa fa-user-friends"></div>
               <b>Friends</b>
             <% end %>
             <%= link_to user_path(current_user), class: "dropdown-item" do %>
@@ -41,14 +44,31 @@
             <%= link_to projects_path, class: "dropdown-item" do %>
               <div class="fa fa-trophy"></div>
               <b>All Challenges</b>
+              <div class="badge badge-success">
+                <%= Project.count %>
+              </div>
             <% end %>
             <%= link_to new_project_path, class: "dropdown-item" do %>
-              <div class="text-success fa fa-plus"></div>
+              <div class="fa fa-plus"></div>
               <b> Issue a Challenge</b>
+            <% end %>
+            <%= link_to created_projects_path, class: "dropdown-item" do %>
+              <div class="fa fa-user-shield"></div>
+              <b> Challenges Issued</b>
+              <div class="badge badge-success">
+                <%= current_user.projects.count %>
+              </div>
             <% end %>
             <%= link_to enrollments_path, class: "dropdown-item" do %>
               <div class="fa fa-lock-open"></div>
               <b>Challenges Accepted</b>
+              <div class="badge badge-success">
+                <%= current_user.enrollments.count %>
+              </div>
+            <% end %>
+            <%= link_to pending_review_projects_path, class: "dropdown-item" do %>
+              <div class="fa fa-star"></div>
+              <b>Pending Review</b>
             <% end %>
           </div>
         </li>

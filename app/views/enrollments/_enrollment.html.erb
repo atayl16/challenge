@@ -20,7 +20,7 @@
   <% if current_user %>
     <div class="card-footer">
       <% if policy(enrollment).edit? %>
-        <%= link_to 'Edit Review', edit_enrollment_path(enrollment) %>
+        <%= button_to 'Edit Review', edit_enrollment_path(enrollment), :class => "btn btn-shiny btn-info" %>
       <% end %>
     </div>
   <% end %>

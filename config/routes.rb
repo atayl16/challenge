@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :projects, path: :challenges do
     resources :enrollments, only: [:new, :create]
+    get :accepted, :pending_review, :created, on: :collection
   end
 end
