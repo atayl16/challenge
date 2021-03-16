@@ -1,31 +1,46 @@
-<table class="table table-bordered table-striped table-sm">
+<%= search_form_for @q do |f| %>
+  <%= f.search_field :user_email_cont, placeholder: 'User Email' %>
+  <%= f.search_field :project_name_cont, placeholder: 'Challenge' %>
+  <%= f.search_field :rating_eq, placeholder: 'Rating' %>
+  <%= f.search_field :review_cont, placeholder: 'Review' %>
+<br>
+  <%= f.button :submit, class: "btn btn-sm shiny" do%>
+    <div class="fa fa-search"></div>
+    Search
+  <% end %>
+  <%= link_to enrollments_path, class: 'btn btn-sm shiny' do %>
+  <div class="fa fa-sync-alt"></div>
+  Reset
+  <% end %>
+<% end %>
+<p></p>
+<table class="table table-bordered table-striped table-sm table-hover">
   <thead>
     <tr>
       <th>ID</th>
       <th>
         <div class="fa fa-user"></div>
-        User
+        <%= sort_link(@q, :user_email) %>
       </th>
       <th>
         <div class="fa fa-clock"></div>
-        <div class="fa fa-lock-open"></div>
-        joined
+        <%= sort_link(@q, :created_at) %>
       </th>
       <th>
-        <div class="fa fa-graduation-cap"></div>
-        Challenge
+        <div class="fa fa-trophy"></div>
+        <%= sort_link(@q, :project_name) %>
       </th>
       <th>
-        <div class="text-warning fa fa-clock"></div>
-        Reviewed on
+        <div class="fa fa-clock"></div>
+        <%= sort_link(@q, :updated_at) %>
       </th>
       <th>
-        <div class="text-warning fa fa-star"></div>
-        Rating
+        <div class="fa fa-star"></div>
+        <%= sort_link(@q, :rating) %>
       </th>
       <th>
-        <div class="text-warning fa fa-comment"></div>
-        Review
+        <div class="fa fa-comment"></div>
+        <%= sort_link(@q, :review) %>
       </th>
       <th></th>
       <th></th>
@@ -71,3 +86,4 @@
     <% end %>
   </tbody>
 </table>
+<%== pagy_bootstrap_nav(@pagy) %>

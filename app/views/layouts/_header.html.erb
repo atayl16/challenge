@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fbeec1">
   <a class="navbar-brand" href="/">Challenger</a>
   <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
     <span class="navbar-toggler-icon"></span>
@@ -12,29 +12,45 @@
             Home
           <% end %>
         </li>
-        <li class="<%= 'active font-weight-bold' if current_page?(users_path) %> nav-item">
-          <%= link_to users_path, class: 'nav-link' do %>
+        <li class="nav-item dropdown <%= 'active font-weight-bold' if current_page?(users_path) %>">
+          <a class="nav-link dropdown-toggle" href="/users" id="usersDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="fa fa-user"></div>
-            Users
-          <% end %>
+              Users
+          </a>
+          <div class="dropdown-menu" aria-labelledby="usersDropdown">
+            <%= link_to users_path, class: "dropdown-item" do %>
+              <div class="text-primary fa fa-users"></div>
+              <b>All Users</b>
+            <% end %>
+            <%= link_to users_path, class: "dropdown-item" do %>
+              <div class="text-danger fa fa-user-friends"></div>
+              <b>Friends</b>
+            <% end %>
+            <%= link_to user_path(current_user), class: "dropdown-item" do %>
+              <div class="fa fa-user"></div>
+              <b>My Profile</b>
+            <% end %>
+          </div>
         </li>
-        <li class="<%= 'active font-weight-bold' if current_page?(projects_path) %> nav-item">
-          <%= link_to projects_path, class: 'nav-link' do %>
+        <li class="nav-item dropdown <%= 'active font-weight-bold' if current_page?(projects_path) %>">
+          <a class="nav-link dropdown-toggle" href="/users" id="challengesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="fa fa-trophy"></div>
-            Challenges
-          <% end %>
-        </li>
-        <li class="<%= 'active font-weight-bold' if current_page?(new_project_path) %> nav-item">
-          <%= link_to new_project_path, class: 'nav-link' do %>
-            <div class="fa fa-plus"></div>
-            New Challenge
-          <% end %>
-        </li>
-        <li class="<%= 'active font-weight-bold' if current_page?(enrollments_path) %> nav-item">
-          <%= link_to enrollments_path, class: 'nav-link' do %>
-            <div class="fa fa-lock-open"></div>
-            Enrollments
-          <% end %>
+              Challenges
+          </a>
+          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="challengesDropdown">
+            <%= link_to projects_path, class: "dropdown-item" do %>
+              <div class="fa fa-trophy"></div>
+              <b>All Challenges</b>
+            <% end %>
+            <%= link_to new_project_path, class: "dropdown-item" do %>
+              <div class="text-success fa fa-plus"></div>
+              <b> Issue a Challenge</b>
+            <% end %>
+            <%= link_to enrollments_path, class: "dropdown-item" do %>
+              <div class="fa fa-lock-open"></div>
+              <b>Challenges Accepted</b>
+            <% end %>
+          </div>
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
@@ -50,12 +66,6 @@
       <% end %>
       </div>
       <ul class="navbar-nav mr-right">
-        <li class="<%= 'active font-weight-bold' if current_page?(root_path) %> nav-item">
-          <%= link_to root_path, class: 'nav-link' do %>
-            <div class="fa fa-home"></div>
-            Another link
-          <% end %>
-        </li>
         <li class="nav-item dropdown">
           <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
             <b>

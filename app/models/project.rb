@@ -7,6 +7,10 @@ class Project < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  def to_s
+    name
+  end
+
   def joined(user)
     self.enrollments.where(user_id: [user.id], project_id: [self.id]).empty?
   end

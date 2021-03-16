@@ -1,7 +1,14 @@
 <div class="card">
   <div class="card-header">
-    <div class="fa fa-trophy"></div>
-    <%= link_to project.name, project_path(project) %>
+    <div class="row">
+      <div class="col-9">
+        <div class="fa fa-trophy"></div>
+        <%= link_to project.name, project_path(project) %>
+      </div>
+      <div class="col">
+        <em class="text-right"><%= project.duration %></em>
+      </div>
+    </div>
   </div>
   <div class="card-body">
     <%= project.description %>
@@ -11,11 +18,12 @@
   </div>
   <% if policy(project).edit? %>
   <div class="card-footer">
-    <%= link_to 'Edit', edit_project_path(project), class: 'btn btn-sm btn-warning shiny' %>
-    <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger shiny' %>
+    <%= link_to 'Edit', edit_project_path(project), class: 'btn btn-sm btn-palegreen text-white shiny' %>
+    <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-magenta text-white shiny' %>
   </div>
   <% end %>
   <div class="card-footer">
     <%= enrollment_button(project) %>
+    <%= review_button(project) %>
   </div>
 </div>

@@ -23,6 +23,10 @@ class User < ApplicationRecord
     end
   end
 
+  def to_s
+    email
+  end
+
   def join_project(project)
     self.enrollments.create(project: project)
   end

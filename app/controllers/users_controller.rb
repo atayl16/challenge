@@ -14,6 +14,15 @@ class UsersController < ApplicationController
     authorize @user
   end
 
+  def dashboard
+    if current_user
+      @user = current_user
+      @enrollments = Enrollment.all.where(user: current_user)
+    else
+      redirect_to root_path
+    end
+  end
+
   def update
     authorize @user
     if @user.update(user_params)
