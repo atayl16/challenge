@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_192504) do
+ActiveRecord::Schema.define(version: 2021_03_20_164411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 2021_03_16_192504) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.integer "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "enrollments", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.bigint "user_id", null: false
@@ -77,6 +88,15 @@ ActiveRecord::Schema.define(version: 2021_03_16_192504) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "friend_id"
+    t.boolean "confirmed", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_invitations_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -86,6 +106,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_192504) do
     t.bigint "user_id", null: false
     t.string "slug"
     t.string "duration"
+    t.float "average_rating", default: 0.0, null: false
     t.index ["slug"], name: "index_projects_on_slug", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -131,7 +152,9 @@ ActiveRecord::Schema.define(version: 2021_03_16_192504) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "users"
   add_foreign_key "enrollments", "projects"
   add_foreign_key "enrollments", "users"
+  add_foreign_key "invitations", "users"
   add_foreign_key "projects", "users"
 end

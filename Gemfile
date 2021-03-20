@@ -19,7 +19,7 @@ gem 'friendly_id', '~> 5.4.0'
 gem 'ransack'
 gem "rolify"
 gem "pundit"
-gem 'pagy'
+gem 'pagy', '~> 3.5'
 
 group :development, :test do
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

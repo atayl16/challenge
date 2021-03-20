@@ -33,6 +33,10 @@
     <% end %>
     <% if policy(user).edit? %>
       <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-yellow shiny' %>
-    <% end%>
+    <% end %>
+    <% if !Invitation.reacted?(current_user.id, user.id) && current_user != user %>
+      <%= link_to 'Send Invitation', invitations_create_path(ids: {id1: current_user.id, id2: user.id}) %>
+    <% end %>
+
   </div>
 </div>
