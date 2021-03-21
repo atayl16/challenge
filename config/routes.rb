@@ -11,5 +11,10 @@ Rails.application.routes.draw do
   resources :projects, path: :challenges do
     resources :enrollments, only: [:new, :create, :edit]
     get :accepted, :pending_review, :created, on: :collection
+    resources :comments, module: :projects
+  end
+
+  resources :comments do
+    resources :comments
   end
 end

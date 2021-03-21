@@ -7,7 +7,7 @@
     <%= f.input :name, label: "Challenge Title" %>
     <%= f.input :duration, label: "Time Needed", placeholder: "Optional - 20 min, 3 days, etc" %>
     <%= f.label :content, label: "Details" %>
-    <%= f.rich_text_area :content %>
+    <%= f.rich_text_area :content, class: "form-control", id: f.object.object_id %>
   </div>
 <br>
   <div class="form-actions">

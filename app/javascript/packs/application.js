@@ -15,6 +15,8 @@ ActiveStorage.start()
 require("bootstrap")
 require("trix")
 require("@rails/actiontext")
+require("controllers")
+
 
 import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/css/all"
@@ -26,6 +28,11 @@ document.addEventListener("turbolinks:load", function() {
         $('[data-toggle="popover"]').popover()
     })
 })
+console.log('Hello World from Webpacker')
 
-require("trix")
-require("@rails/actiontext")
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
+
+const application = Application.start()
+const context = require.context("controllers", true, /.js$/)
+application.load(definitionsFromContext(context))

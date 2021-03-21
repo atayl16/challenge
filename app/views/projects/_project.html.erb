@@ -15,7 +15,9 @@
   </div>
   <div class="card-footer">
     <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
-
+    <br>
+    <div class="fa fa-users"></div>
+      <%= project.enrollments_count %>
     <% if project.average_rating > 0 %>
     <br>
     <div class="text-warning fa fa-star"></div>

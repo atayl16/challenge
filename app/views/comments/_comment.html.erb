@@ -1,16 +1,11 @@
-<%= turbo_stream_from comment %>
-<%= turbo_frame_tag comment do %>
-<div class="card">
-<div class="card-body">
+<div class="border-left pl-4 mt-4">
+  <strong><%= comment.user.name %></strong> commented
+  <%= comment.content %>
 
-<div class="d-flex justify-content-between">
-  <div>    <%= comment.user.name %>  </div>
-  <div>
-    <%= link_to "Edit", edit_comment_path(comment), class: "mr-2" %>
-    <%= button_to "Delete", comment_path(comment), method: :delete, data: {confirm: "Are you sure?"} %>
+  <div data-controller="reply">
+    <small><%= link_to "Reply", "#", data: { action: "click->reply#toggle" } %></small>
+    <%= render partial: "comments/form", locals: { commentable: @project, parent_id: comment.id, class: "mt-4 d-none", target: "reply.form", id: comment.object_id } %>
   </div>
-</div>
-   <%= comment.body %>
-<% end %>
-</div>
+
+  <%= render comment.comments %>
 </div>

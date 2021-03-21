@@ -1,33 +1,9 @@
 <div class="container">
   <%= render 'users/user', user: @user %>
+  <p></p>
+  <div class="card-group">
+    <div class="card card-body">
+    <%= render 'users/friends', user: @user %>
+    </div>
+  </div>
 </div>
-
-<% if @user.friends.any? %>
-<h3>Friends of <strong> <%= @user.name %> </strong> </h3>
-  <ol>
-    <% @user.friends.each do |friend| %>
-      <li>
-        <%= friend.name %>
-        <% if @user == current_user %>
-          <%= link_to 'Unfriend',
-          invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id))  %>
-        <% end %>
-      </li>
-    <% end %>
-  </ol>
-<% end %>
-
-<% if @user == current_user %>
-<h3> These people wants to be friends with you: </h3>
-<ol>
-    <% @user.pending_invitations.each do |invitation| %>
-      <li>
-        <%= User.find(invitation.user_id).name %>
-        <%= link_to 'Accept Invitation',
-        invitations_update_path(invitation_id: invitation.id) %>
-        <%= link_to 'Reject Invitation',
-        invitations_destroy_path(invitation_id: invitation.id) %>
-      </li>
-    <% end %>
-  <% end %>
-</ol>

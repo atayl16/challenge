@@ -1,24 +1,10 @@
-<% model = [local_assigns[:commentable], comment].compact %>
-
-<%= form_with model: model, id: dom_id_for_records(*model) do |form| %>
-  <div class="card">
-  <% if comment.errors.any? %>
-    <div class="card-header">
-      <div id="error_explanation">
-        <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
-        <ul>
-          <% comment.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
-      <%= form.rich_text_area :body %><br>
-      <%= form.submit class: "btn btn-primary shiny" %>
-      <%= link_to "Cancel", comment, class: "btn btn-link" if form.object.persisted? %>
+<%= form_with model: [commentable, Comment.new], local: true, html: { class: local_assigns[:class], data: { target: local_assigns[:target] } } do |form| %>
+  <div class="form-group">
+    <%= form.rich_text_area :content, class: "form-control", id: local_assigns[:parent_id] %>
   </div>
-  <% end %>
-</div>
+
+  <div class="form-group">
+    <%= form.hidden_field :parent_id, value: local_assigns[:parent_id] %>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

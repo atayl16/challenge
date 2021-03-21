@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+    <% if @user.friends.any? %>
+    <h3><div class="fa fa-user-friends">
+    </div> Friends of <strong> <%= @user.name %> </strong> </h3>
+        <% @user.friends.each do |friend| %>
+            <div class="row">
+              <div class="col-6">
+                <%= link_to friend.name, user_path(friend) %>
+              </div>
+              <div class="col">
+                <% if @user == current_user %>
+                  <%= link_to 'Unfriend',
+                  invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id)), class: "btn btn-danger shiny"  %>
+                <% end %>
+              </div>
+              <hr>
+            </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col">
+  <% if @user == current_user && @user.pending_invitations.any? %>
+    <h3> These people wants to be friends with you: </h3>
+        <% @user.pending_invitations.each do |invitation| %>
+          <div class="row">
+            <div class="col-6">
+              <%= link_to User.find(invitation.user_id).name, user_path(User.find(invitation.user_id))  %>
+            </div>
+            <div class="col">
+              <%= link_to 'Accept Invitation',
+              invitations_update_path(invitation_id: invitation.id) %>
+              <%= link_to 'Reject Invitation',
+              invitations_destroy_path(invitation_id: invitation.id) %>
+            </div>
+          </div>
+      <% end %>
+      <hr>
+    <% end %>
+  </div>
+</div>

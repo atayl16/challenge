@@ -20,7 +20,7 @@ module ProjectsHelper
   def delete_project_button(project)
     if current_user
       if @project.user == current_user
-        button_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-magenta text-white shiny'
+        button_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-magenta text-white shiny'
       end
     end
   end

@@ -3,7 +3,8 @@ class Project < ApplicationRecord
   has_rich_text :content
   has_many :enrollments
   validates :name,  presence: true
-
+  has_many :comments, as: :commentable
+  
   extend FriendlyId
   friendly_id :name, use: :slugged
 

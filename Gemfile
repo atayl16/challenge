@@ -20,6 +20,7 @@ gem 'ransack'
 gem "rolify"
 gem "pundit"
 gem 'pagy', '~> 3.5'
+gem 'ancestry'
 
 group :development, :test do
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
