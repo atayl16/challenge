@@ -9,7 +9,7 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   extend FriendlyId
-  friendly_id :email, use: :slugged
+  friendly_id :name, use: :slugged
   rolify
 
 

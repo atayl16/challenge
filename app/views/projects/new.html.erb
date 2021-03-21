@@ -1,8 +1,11 @@
 <div class="card" >
-  <h1 class="card-header">New Challenge</h1>
+  <h3 class="card-header">
+    <div class="fa fa-trophy"></div>
+    New Challenge
+  </h3>
   <div class="card-body">
     <%= render 'form', project: @project %>
-    </div>
+  </div>
   <div class="card-footer text-muted">
     <div class="btn-group" role="group">
       <%= button_to 'View', @project, :class => "btn shiny btn-success" %>

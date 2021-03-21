@@ -1,21 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-  <em><%= @project.duration %></em>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @project.content %>
-</p>
-<div class="btn-group" role="group">
-  <%= button_to 'Edit', edit_project_path(@project), :class => "btn shiny btn-palegreen" %>
-  <%= button_to 'Back', projects_path, :class => "btn shiny btn-yellow" %>
-</div>
+<%= render 'project', project: @project %>
+  <div class="card-footer">
+    <div class="btn-group" role="group" >
+      <%= edit_project_button(@project) %>
+      <%= delete_project_button(@project) %>
+    </div>
+  </div>

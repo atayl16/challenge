@@ -4,15 +4,13 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :duration %>
-    <%= f.input :description %>
-    <%= f.label :content %>
+    <%= f.input :name, label: "Challenge Title" %>
+    <%= f.input :duration, label: "Time Needed", placeholder: "Optional - 20 min, 3 days, etc" %>
+    <%= f.label :content, label: "Details" %>
     <%= f.rich_text_area :content %>
   </div>
 <br>
   <div class="form-actions">
     <%= f.button :submit, "Save", class: "btn btn-success shiny" %>
   </div>
-  <p></p>
 <% end %>

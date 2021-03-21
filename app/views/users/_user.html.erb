@@ -1,29 +1,18 @@
 <div class="card">
   <div class="card-header">
     <div class="fa fa-user"></div>
-    <%= user.name %>
-    <%= link_to user.email, user_path(user) %>
+    <%= link_to user.name, user_path(user) %>
   </div>
   <div class="card-footer">
-    Signed up
-    <%= time_ago_in_words(user.created_at) %>
-    ago
+    <%=  user.email %>
   </div>
   <div class="card-footer">
-    <%= 'sign_in_count'.humanize %>
-    <%= user.sign_in_count %>
+    Signed in <%= user.sign_in_count %> times
     <div class="row"></div>
-    <%= 'current_sign_in_at'.humanize %>
-    <%= user.current_sign_in_at %>
+    Last signed in <%= time_ago_in_words(user.current_sign_in_at) %> ago
     <div class="row"></div>
-    <%= 'last_sign_in_at'.humanize %>
-    <%= user.last_sign_in_at %>
-    <div class="row"></div>
-    <%= 'current_sign_in_ip'.humanize %>
-    <%= user.current_sign_in_ip %>
-    <div class="row"></div>
-    <%= 'last_sign_in_ip'.humanize %>
-    <%= user.last_sign_in_ip %>
+    Signed up <%= time_ago_in_words(user.created_at) %> ago
+
   </div>
   <div class="card-footer">
     <% user.roles.each do |role| %>

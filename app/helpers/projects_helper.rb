@@ -4,7 +4,23 @@ module ProjectsHelper
       if project.enrollments.where(user: current_user).any?
         link_to "Continue", project_path(project), class: 'btn btn-info shiny'
       else
-        link_to "Join", new_project_enrollment_path(project), class: 'btn btn-info text-white shiny'
+        render "enrollments/enroll", project: project
+      end
+    end
+  end
+
+  def edit_project_button(project)
+    if current_user
+      if @project.user == current_user
+        button_to 'Edit', edit_project_path(@project), method: :get, :class => "btn shiny btn-palegreen"
+      end
+    end
+  end
+
+  def delete_project_button(project)
+    if current_user
+      if @project.user == current_user
+        button_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-magenta text-white shiny'
       end
     end
   end

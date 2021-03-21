@@ -11,19 +11,17 @@
     </div>
   </div>
   <div class="card-body">
-    <%= project.description %>
+    <%= project.content %>
   </div>
   <div class="card-footer">
-    Created by <%= project.user.email %> on <%= project.created_at.strftime('%b-%d-%Y') %>
+    <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
+
+    <% if project.average_rating > 0 %>
+    <br>
+    <div class="text-warning fa fa-star"></div>
+      <%= project.average_rating %>
+    <% end %>
   </div>
-  <% if policy(project).edit? %>
-  <div class="card-footer">
-    <div class="btn-group" role="group" >
-      <%= button_to 'Edit' , edit_project_path(project), class: 'btn btn-sm btn-palegreen text-white shiny' %>
-      <%= button_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-magenta text-white shiny' %>
-    </div>
-  </div>
-  <% end %>
   <div class="card-footer">
     <%= enrollment_button(project) %>
     <%= review_button(project) %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'invitations/create'
   get 'invitations/destroy'
   resources :projects, path: :challenges do
-    resources :enrollments, only: [:new, :create]
+    resources :enrollments, only: [:new, :create, :edit]
     get :accepted, :pending_review, :created, on: :collection
   end
 end

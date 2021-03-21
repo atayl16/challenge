@@ -1,8 +1,11 @@
-<h1>Rate this Challenge</h1>
-
-<%= render 'form', enrollment: @enrollment %>
-
-<div class="btn-group" role="group">
-  <%= button_to 'See Review', @enrollment, :class => "btn shiny btn-success" %>
-  <%= button_to 'Back', enrollments_path, :class => "btn shiny btn-yellow" %>
+<div class="card">
+  <div class="card-body">
+  <h3><div class="fa fa-star"></div> Rate this Challenge</h3>
+  <%= render 'form', enrollment: @enrollment %>
+<hr>
+  <div class="btn-group" role="group">
+    <%= button_to 'Cancel', @enrollment, :class => "btn shiny btn-success" %>
+  </div>
+  <p></p>
+  </div>
 </div>

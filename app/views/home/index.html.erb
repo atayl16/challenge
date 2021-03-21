@@ -79,7 +79,7 @@
   Top rated challenges
 </h2>
 <div class="card-columns">
-  <% @projects.each do |project| %>
+  <% @best_projects.each do |project| %>
     <%= render 'projects/project', project: project %>
   <% end %>
 </div>

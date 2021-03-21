@@ -16,6 +16,16 @@ class Enrollment < ApplicationRecord
     user.to_s + " " + project.to_s
   end
 
+  after_save do
+    unless rating.nil? || rating.zero?
+      project.update_rating
+    end
+  end
+
+  after_destroy do
+    project.update_rating
+  end
+
   protected
 
 
