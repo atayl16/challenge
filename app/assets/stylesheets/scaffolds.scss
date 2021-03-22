@@ -63,3 +63,8 @@ div.actions {
 
 label {
   display: block; }
+
+.scrollable {
+  overflow-y: scroll;
+  height: 100px;
+}

@@ -25,9 +25,12 @@
                 <%= User.count %>
               </div>
             <% end %>
-            <%= link_to users_path, class: "dropdown-item" do %>
+            <%= link_to user_path(current_user), class: "dropdown-item" do %>
               <div class="fa fa-user-friends"></div>
               <b>Friends</b>
+              <div class="badge badge-success">
+                <%= current_user.friends.count %>
+              </div>
             <% end %>
             <%= link_to user_path(current_user), class: "dropdown-item" do %>
               <div class="fa fa-user"></div>
@@ -56,14 +59,14 @@
               <div class="fa fa-user-shield"></div>
               <b> Challenges Issued</b>
               <div class="badge badge-success">
-                <%= current_user.projects.count %>
+                <%= current_user.projects_count %>
               </div>
             <% end %>
             <%= link_to enrollments_path, class: "dropdown-item" do %>
               <div class="fa fa-lock-open"></div>
               <b>Challenges Accepted</b>
               <div class="badge badge-success">
-                <%= current_user.enrollments.count %>
+                <%= current_user.enrollments_count %>
               </div>
             <% end %>
             <%= link_to pending_review_projects_path, class: "dropdown-item" do %>

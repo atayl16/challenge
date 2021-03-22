@@ -1,12 +1,34 @@
 <div class="card">
-  <div class="card-header">
+  <div class="card-header text-center">
     <div class="row">
-      <div class="col-9">
         <div class="fa fa-trophy"></div>
         <%= link_to project.name, project_path(project) %>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-8">
+        <img src="https://www.w3schools.com/w3images/avatar6.png" alt="Avatar" style="width:30%"><p></p>
+        <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
+        <p></p>
+        <div class="fa fa-users"></div>
+          <%= project.enrollments_count %>
+        <% if project.average_rating > 0 %>
+        <div class="text-warning fa fa-star"></div>
+          <%= project.average_rating %>
+        <% end %>
+        <% if project.duration? %>
+        <p></p>
+          <em class="text-right">Time: <%= project.duration %></em><p></p>
+        <% end %>
+        <% if project.requirements? %>
+        <p></p>
+          <em class="text-right">Requirements: <%= project.requirements %></em><p></p>
+        <% end %>
+        <%= enrollment_button(project) %> <br>
       </div>
-      <div class="col">
-        <em class="text-right"><%= project.duration %></em>
+      <div class="col-md-4">
+        <img src="https://source.unsplash.com/random" class="rounded img-fluid float-end">
       </div>
     </div>
   </div>
@@ -14,18 +36,10 @@
     <%= project.content %>
   </div>
   <div class="card-footer">
-    <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
-    <br>
-    <div class="fa fa-users"></div>
-      <%= project.enrollments_count %>
-    <% if project.average_rating > 0 %>
-    <br>
-    <div class="text-warning fa fa-star"></div>
-      <%= project.average_rating %>
-    <% end %>
-  </div>
-  <div class="card-footer">
-    <%= enrollment_button(project) %>
-    <%= review_button(project) %>
+    <div class="btn-group">
+      <%= review_button(project) %>
+      <%= edit_project_button(project) %>
+      <%= delete_project_button(project) %>
+    </div>
   </div>
 </div>

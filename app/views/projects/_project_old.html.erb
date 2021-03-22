@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-9">
+        <div class="fa fa-trophy"></div>
+        <%= link_to project.name, project_path(project) %>
+      </div>
+      <div class="col">
+        <em class="text-right"><%= project.duration %></em>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <%= project.content %>
+  </div>
+  <div class="card-footer">
+    <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
+    <br>
+    <div class="fa fa-users"></div>
+      <%= project.enrollments_count %>
+    <% if project.average_rating > 0 %>
+    <br>
+    <div class="text-warning fa fa-star"></div>
+      <%= project.average_rating %>
+    <% end %>
+  </div>
+  <div class="card-footer">
+    <%= enrollment_button(project) %>
+    <%= review_button(project) %>
+  </div>
+</div>

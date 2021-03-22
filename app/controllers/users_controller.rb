@@ -15,12 +15,13 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    if current_user
-      @user = current_user
-      @enrollments = Enrollment.all.where(user: current_user)
-    else
-      redirect_to root_path
-    end
+    @user = current_user
+    @enrollments = Enrollment.all.where(user: current_user)
+    @latest_project = Project.latest.limit(1)
+    @best_project = Project.best.limit(1)
+    @popular_project = Project.popular.limit(1)
+    @created_projects = Project.where(user: current_user).limit(5)
+    @project = Project.new
   end
 
   def update

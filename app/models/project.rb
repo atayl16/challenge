@@ -1,12 +1,16 @@
 class Project < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   has_rich_text :content
   has_many :enrollments
   validates :name,  presence: true
   has_many :comments, as: :commentable
-  
+
   extend FriendlyId
   friendly_id :name, use: :slugged
+
+  scope :latest, -> { limit(3).order(created_at: :desc) }
+  scope :best, -> { limit(3).order(average_rating: :desc, created_at: :desc) }
+  scope :popular, -> { limit(3).order(enrollments_count: :desc, created_at: :desc) }
 
   def to_s
     name

@@ -25,11 +25,11 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
          <h4 class="w3-center">My Profile</h4>
          <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <br>
-         <%= current_user.email %>
+
          <hr>
-         <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
+         <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> <%= link_to current_user.name, user_path(current_user) %></p>
+         <p><i class="fa fa-at fa-fw w3-margin-right w3-text-theme"></i> <%= current_user.email %></p>
+         <p><i class="fa fa-calendar-check fa-fw w3-margin-right w3-text-theme"></i> <%= current_user.created_at.strftime("%B %d, %Y") %></p>
         </div>
       </div>
       <br>
@@ -37,41 +37,43 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       <!-- Accordion -->
       <div class="w3-card w3-round">
         <div class="w3-white">
-          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-trophy text-white fa-fw w3-margin-right"></i> My Challenges</button>
+          <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-trophy text-white fa-fw w3-margin-right"></i> Accepted Challenges</button>
           <div id="Demo1" class="w3-hide w3-container">
-            <hr>
+            <br>
             <% @enrollments.each do |enrollment| %>
-              <%= link_to enrollment.project.name, project_path(enrollment.project) %>
+              <p><%= link_to enrollment.project.name, project_path(enrollment.project) %></p>
               <hr>
             <% end %>
           </div>
-          <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-check text-white fa-fw w3-margin-right"></i> My Events</button>
-          <div id="Demo2" class="w3-hide w3-container">
-            <p>Some other text..</p>
-          </div>
           <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users text-white fa-fw w3-margin-right"></i> My Friends</button>
-          <div id="Demo3" class="w3-hide w3-container">
-         <div class="w3-row-padding">
-         <br>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="https://www.w3schools.com/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-         </div>
+            <div id="Demo3" class="w3-hide w3-container">
+             <div class="w3-row-padding">
+             <br>
+               <% if @user.friends.any? %>
+                   <% @user.friends.each do |friend| %>
+                       <div class="row">
+                         <div class="col">
+                           <p><%= link_to friend.name, user_path(friend) %></p>
+                         </div>
+                         <div class="col-4">
+                           <%= link_to 'Unfriend',
+                           invitations_destroy_path(invitation_id: Invitation.find_invitation(@user.id, friend.id)), class: "btn btn-sm btn-danger shiny"  %>
+                         </div>
+                         <hr>
+                       </div>
+                   <% end %>
+                   <% else %>
+                     <p><%= link_to "Find a Friend", users_path %></p>
+                 <% end %>
+             </div>
+          </div>
+          <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-check text-white fa-fw w3-margin-right"></i> Created Challenges</button>
+          <div id="Demo2" class="w3-hide w3-container">
+              <br>
+              <% @created_projects.each do |project| %>
+                <p><%= link_to project.name, project_path(project) %></p>
+                <hr>
+              <% end %>
           </div>
         </div>
       </div>
@@ -117,11 +119,9 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">Create a new challenge</h6>
-              <p contenteditable="true" class="w3-border w3-padding">Challenge name</p>
-              <p contenteditable="true" class="w3-border w3-padding">Challenge details</p>
+              <h5 class="w3-opacity">Issue a Challenge</h5>
+              <%= render :partial => "projects/form", :locals => { :project => @project } %>
 
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>
             </div>
           </div>
         </div>
@@ -174,30 +174,60 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     <div class="w3-col m2">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
-          <p>Newest Challenge</p>
+          <p>Most Popular</p>
+          <% @popular_project.each do |project| %>
           <img src="https://www.w3schools.com/w3images/forest.jpg" alt="Forest" style="width:100%;">
-          <p><strong>Take a Walk</strong></p>
-          <p>Exercise is important... so is fresh air. Take a walk and enjoy both!</p>
-          <p><button class="w3-button w3-block w3-theme-l4">Join</button></p>
+          <p><strong><%= link_to project.name, project_path(project) %></strong></p>
+          <p><%= project.content %></p>
+          <%= enrollment_button(project) %><br>
+          <% end %>
+        </div>
+      </div>
+      <br>
+      <div class="w3-card w3-round w3-white w3-center">
+        <div class="w3-container">
+          <p>Highest Rated</p>
+          <% @best_project.each do |project| %>
+          <img src="https://www.w3schools.com/w3images/forest.jpg" alt="Forest" style="width:100%;">
+          <p><strong><%= link_to project.name, project_path(project) %></strong></p>
+          <p><%= project.content %></p>
+          <%= enrollment_button(project) %><br>
+          <% end %>
+        </div>
+      </div>
+      <br>
+      <div class="w3-card w3-round w3-white w3-center">
+        <div class="w3-container">
+          <p>Newest Challenge</p>
+          <% @latest_project.each do |project| %>
+          <img src="https://www.w3schools.com/w3images/forest.jpg" alt="Forest" style="width:100%;">
+          <p><strong><%= link_to project.name, project_path(project) %></strong></p>
+          <p><%= project.content %></p>
+          <%= enrollment_button(project) %><br>
+          <% end %>
         </div>
       </div>
       <br>
 
+    <% @user.pending_invitations.each do |invitation| %>
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
           <p>Friend Request</p>
           <img src="https://www.w3schools.com/w3images/avatar6.png" alt="Avatar" style="width:50%"><br>
-          <span>Jane Doe</span>
+          <span><%= link_to User.find(invitation.user_id).name, user_path(User.find(invitation.user_id))  %></span>
           <div class="w3-row w3-opacity">
             <div class="w3-half">
-              <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+              <button class="w3-button w3-block w3-green w3-section" title="Accept"><%= link_to 'Accept',
+              invitations_update_path(invitation_id: invitation.id) %></button>
             </div>
             <div class="w3-half">
-              <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+              <button class="w3-button w3-block w3-red w3-section" title="Decline"><%= link_to 'Reject',
+              invitations_destroy_path(invitation_id: invitation.id) %></button>
             </div>
           </div>
         </div>
       </div>
+    <% end %>
       <br>
 
       <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
