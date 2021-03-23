@@ -51,6 +51,7 @@ class User < ApplicationRecord
     invitations.create(friend_id: user.id)
   end
 
+
   private
     def must_have_a_role
       unless roles.any?
