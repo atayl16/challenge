@@ -9,4 +9,12 @@ module ApplicationHelper
     end
   end
 
+  def project_avatar(project)
+    if project.avatar.attached?
+      project.avatar
+    else
+      image_url("https://cdn.pixabay.com/photo/2018/11/14/07/15/success-3814608_960_720.png")
+    end
+  end
+
 end

@@ -5,6 +5,8 @@ class Project < ApplicationRecord
   validates :name,  presence: true
   has_many :comments, as: :commentable
   acts_as_votable
+  has_one_attached :avatar
+
 
   extend FriendlyId
   friendly_id :name, use: :slugged

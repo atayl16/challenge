@@ -1,8 +1,10 @@
 <div class="card">
   <div class="card-header">
-    <%= image_tag user_avatar(current_user, 100), class: "rounded" %>
-    <div class="fa fa-user"></div>
-    <%= link_to user.name, user_path(user) %><br>
+    <%= image_tag user_avatar(current_user, 75), class: "rounded" %>
+    <span class="h5">
+      <div class="fa fa-user"></div>
+      <%= link_to user.name, user_path(user) %><br>
+    </span>
   <div class="card-body">
     <hr>
     <%=  user.email %>

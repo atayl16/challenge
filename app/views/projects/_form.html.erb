@@ -4,6 +4,9 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
+    <%= f.label :avatar, label: "Challenge Image" %><br>
+    <%= f.file_field :avatar %>
+    <p></p>
     <%= f.input :name, placeholder: "Challenge Title", label: false %>
     <%= f.input :duration, label: false, placeholder: "Time Needed - 20 min, 3 days, etc" %>
     <%= f.input :requirements, label: false, placeholder: "Requirements - What will users need to have" %>

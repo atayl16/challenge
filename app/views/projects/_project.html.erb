@@ -8,7 +8,6 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-8">
-            <%= image_tag user_avatar(current_user, 100), class: "rounded" %><p></p>
         <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
         <p></p>
         <div class="fa fa-users"></div>
@@ -34,7 +33,7 @@
         <%= enrollment_button(project) %> <br>
       </div>
       <div class="col-md-4">
-        <img src="https://source.unsplash.com/random" class="rounded img-fluid float-end">
+        <%= image_tag project_avatar(project), class: "rounded img-fluid float-end" %><p></p>
       </div>
     </div>
   </div>
