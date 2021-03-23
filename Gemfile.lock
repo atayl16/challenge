@@ -10,6 +10,12 @@ GIT
       responders
       warden (~> 1.2.3)
 
+GIT
+  remote: https://github.com/mdeering/gravatar_image_tag.git
+  revision: c02351f7d6649e2346394e33164a7154e671ec19
+  specs:
+    gravatar_image_tag (1.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -72,6 +78,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    acts_as_votable (0.13.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ancestry (3.2.1)
@@ -245,6 +252,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts_as_votable
   ancestry
   bootsnap (>= 1.4.4)
   byebug
@@ -253,6 +261,7 @@ DEPENDENCIES
   devise-bootstrap-views (~> 1.0)
   faker
   friendly_id (~> 5.4.0)
+  gravatar_image_tag!
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)

@@ -4,6 +4,7 @@ class Project < ApplicationRecord
   has_many :enrollments
   validates :name,  presence: true
   has_many :comments, as: :commentable
+  acts_as_votable
 
   extend FriendlyId
   friendly_id :name, use: :slugged

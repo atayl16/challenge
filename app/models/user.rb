@@ -7,10 +7,12 @@ class User < ApplicationRecord
   has_many :enrollments
   validate :must_have_a_role, on: :update
   after_create :assign_default_role
+  has_one_attached :avatar
 
   extend FriendlyId
   friendly_id :name, use: :slugged
   rolify
+  acts_as_voter
 
 
   def assign_default_role

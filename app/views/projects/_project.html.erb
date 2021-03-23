@@ -8,7 +8,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-8">
-        <img src="https://www.w3schools.com/w3images/avatar6.png" alt="Avatar" style="width:30%"><p></p>
+            <%= image_tag user_avatar(current_user, 100), class: "rounded" %><p></p>
         <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
         <p></p>
         <div class="fa fa-users"></div>
@@ -17,6 +17,11 @@
         <div class="text-warning fa fa-star"></div>
           <%= project.average_rating %>
         <% end %>
+        <span class='parent-likes'>
+          <span class="like_count" <%=project.id%>>
+            <i class="fas fa-heart"></i> <%=project.get_likes.size%>
+          </span>
+        </span>
         <% if project.duration? %>
         <p></p>
           <em class="text-right">Time: <%= project.duration %></em><p></p>
@@ -25,6 +30,7 @@
         <p></p>
           <em class="text-right">Requirements: <%= project.requirements %></em><p></p>
         <% end %>
+        <p></p>
         <%= enrollment_button(project) %> <br>
       </div>
       <div class="col-md-4">
@@ -37,6 +43,7 @@
   </div>
   <div class="card-footer">
     <div class="btn-group">
+      <%= like_button(project) %>
       <%= review_button(project) %>
       <%= edit_project_button(project) %>
       <%= delete_project_button(project) %>

@@ -21,6 +21,10 @@ gem "rolify"
 gem "pundit"
 gem 'pagy', '~> 3.5'
 gem 'ancestry'
+gem 'acts_as_votable'
+gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
+
+
 
 group :development, :test do
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

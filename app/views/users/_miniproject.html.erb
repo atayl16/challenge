@@ -1,0 +1,15 @@
+<p></p>
+<p><%= link_to project.name, project_path(project) %></p>
+<div class="fa fa-users"></div>
+  <%= project.enrollments_count %>
+<% if project.average_rating > 0 %>
+<div class="text-warning fa fa-star"></div>
+  <%= project.average_rating %>
+<% end %>
+<span class='parent-likes'>
+  <span class="like_count" <%=project.id%>>
+    <i class="fas fa-heart"></i> <%=project.get_likes.size%>
+  </span>
+</span>
+<%= enrollment_button(project) %>
+<p></p>

@@ -23,7 +23,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
          <h4 class="w3-center">My Profile</h4>
-         <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+         <p class="w3-center"><%= image_tag user_avatar(current_user, 100), class: "rounded" %></p>
          <br>
 
          <hr>
@@ -174,36 +174,33 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     <div class="w3-col m2">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
+          <p></p>
           <p>Most Popular</p>
           <% @popular_project.each do |project| %>
           <img src="https://www.w3schools.com/w3images/forest.jpg" alt="Forest" style="width:100%;">
-          <p><strong><%= link_to project.name, project_path(project) %></strong></p>
-          <p><%= project.content %></p>
-          <%= enrollment_button(project) %><br>
+          <%= render "miniproject", project: project %>
           <% end %>
         </div>
       </div>
       <br>
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
+          <p></p>
           <p>Highest Rated</p>
           <% @best_project.each do |project| %>
           <img src="https://www.w3schools.com/w3images/forest.jpg" alt="Forest" style="width:100%;">
-          <p><strong><%= link_to project.name, project_path(project) %></strong></p>
-          <p><%= project.content %></p>
-          <%= enrollment_button(project) %><br>
+          <%= render "miniproject", project: project %>
           <% end %>
         </div>
       </div>
       <br>
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
+          <p></p>
           <p>Newest Challenge</p>
           <% @latest_project.each do |project| %>
           <img src="https://www.w3schools.com/w3images/forest.jpg" alt="Forest" style="width:100%;">
-          <p><strong><%= link_to project.name, project_path(project) %></strong></p>
-          <p><%= project.content %></p>
-          <%= enrollment_button(project) %><br>
+          <%= render "miniproject", project: project %>
           <% end %>
         </div>
       </div>

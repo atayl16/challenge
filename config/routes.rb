@@ -17,4 +17,9 @@ Rails.application.routes.draw do
   resources :comments do
     resources :comments
   end
+  resources :projects do
+    member do
+      put "like" => "projects#like"
+    end
+  end
 end

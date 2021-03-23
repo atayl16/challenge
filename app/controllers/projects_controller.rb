@@ -1,11 +1,21 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
-  
+  before_action :set_project, only: %i[ show edit update destroy like ]
+  respond_to :js, :html, :json
+
+  def like
+    if params[:format] == 'like'
+      @project.liked_by current_user
+      redirect_to request.referrer
+    elsif params[:format] == 'unlike'
+      @project.unliked_by current_user
+      redirect_to request.referrer
+    end
+  end
 
   def index
     @ransack_path = projects_path
     @ransack_projects = Project.ransack(params[:projects_search], search_key: :projects_search)
-    @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user).order(created_at: :desc))
   end
 
   def accepted

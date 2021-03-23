@@ -1,20 +1,17 @@
 <div class="card">
   <div class="card-header">
+    <%= image_tag user_avatar(current_user, 100), class: "rounded" %>
     <div class="fa fa-user"></div>
-    <%= link_to user.name, user_path(user) %>
-  </div>
-  <div class="card-footer">
+    <%= link_to user.name, user_path(user) %><br>
+  <div class="card-body">
+    <hr>
     <%=  user.email %>
-  </div>
-  <div class="card-footer">
     Signed in <%= user.sign_in_count %> times
     <div class="row"></div>
     Last signed in <%= time_ago_in_words(user.current_sign_in_at) %> ago
     <div class="row"></div>
     Signed up <%= time_ago_in_words(user.created_at) %> ago
-
-  </div>
-  <div class="card-footer">
+    <hr>
     <% user.roles.each do |role| %>
       <div class="badge badge-info">
         <%= role.name %>
@@ -26,5 +23,6 @@
     <% if !Invitation.reacted?(current_user.id, user.id) && current_user != user %>
       <%= link_to 'Send Invitation', invitations_create_path(ids: {id1: current_user.id, id2: user.id}) %>
     <% end %>
+    </div>
   </div>
 </div>
