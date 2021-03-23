@@ -4,7 +4,7 @@ class InvitationsController < ApplicationController
     id2 = params[:ids][:id2]
     @invitation = Invitation.new(user_id: id1, friend_id: id2)
     @invitation.save
-    redirect_to users_path
+    redirect_to users_path, notice: "Friend invite sent."
   end
 
   def destroy

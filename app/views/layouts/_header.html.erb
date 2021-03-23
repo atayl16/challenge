@@ -97,6 +97,10 @@
             </b>
           </a>
           <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+            <%= link_to dashboard_path, class: "dropdown-item" do %>
+              <div class="fa fa-solar-panel"></div>
+              <b>My dashboard</b>
+            <% end %>
             <%= link_to user_path(current_user), class: "dropdown-item" do %>
               <div class="fa fa-user"></div>
               <b>My profile</b>

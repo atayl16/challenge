@@ -1,7 +1,8 @@
 <div class="card">
   <div class="card-body">
     <h3>Edit this Challenge</h3>
-    <%= render 'form', project: @project %>
+    <hr>
+    <%= render 'longform', project: @project %>
     <hr>
     <div class="btn-group" role="group">
       <%= button_to 'View', @project, :class => "btn shiny btn-success" %>

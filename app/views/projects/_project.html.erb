@@ -1,13 +1,12 @@
 <div class="card">
-  <div class="card-header">
-    <div class="row">
-        <div class="fa fa-trophy"></div>
-          <%= link_to project.name, project_path(project) %>
-    </div>
-  </div>
   <div class="card-body">
     <div class="row">
       <div class="col-md-8">
+        <div class="h4">
+          <div class="fa fa-trophy"></div>
+          <%= link_to project.name, project_path(project) %><p></p>
+          <hr>          
+        </div>
         <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
         <p></p>
         <div class="fa fa-users"></div>
@@ -30,7 +29,7 @@
           <em class="text-right">Requirements: <%= project.requirements %></em><p></p>
         <% end %>
         <p></p>
-        <%= enrollment_button(project) %> <br>
+
       </div>
       <div class="col-md-4">
         <%= image_tag project_avatar(project), class: "rounded img-fluid float-end" %><p></p>
@@ -45,6 +44,7 @@
       <%= like_button(project) %>
       <%= review_button(project) %>
       <%= edit_project_button(project) %>
+      <%= enrollment_button(project) %>
       <%= delete_project_button(project) %>
     </div>
   </div>

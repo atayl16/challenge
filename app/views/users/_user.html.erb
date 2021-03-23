@@ -1,29 +1,34 @@
 <div class="card">
   <div class="card-header">
-    <%= image_tag user_avatar(current_user, 75), class: "rounded" %>
+    <%= image_tag user_avatar(user, 75), class: "rounded" %>
     <span class="h5">
       <div class="fa fa-user"></div>
       <%= link_to user.name, user_path(user) %><br>
     </span>
   <div class="card-body">
     <hr>
-    <%=  user.email %>
-    Signed in <%= user.sign_in_count %> times
-    <div class="row"></div>
-    Last signed in <%= time_ago_in_words(user.current_sign_in_at) %> ago
-    <div class="row"></div>
-    Signed up <%= time_ago_in_words(user.created_at) %> ago
-    <hr>
-    <% user.roles.each do |role| %>
-      <div class="badge badge-info">
-        <%= role.name %>
-      </div>
-    <% end %>
+    <div class="fa fa-at"></div>
+    <%=  user.email %><br>
+    <div class="fa fa-clock"></div>
+    Signed in <%= user.sign_in_count %> times <br>
+    <div class="fa fa-calendar"></div>
+    Last signed in <%= time_ago_in_words(user.current_sign_in_at) %> ago <br>
+    <div class="fa fa-calendar-check"></div>
+    Signed up <%= time_ago_in_words(user.created_at) %> ago <br>
+    <div class="fa fa-user-friends"></div>
+    Friends: <%= user.friends.count %> <br>
+
     <% if policy(user).edit? %>
-      <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-yellow shiny' %>
-    <% end %>
-    <% if !Invitation.reacted?(current_user.id, user.id) && current_user != user %>
-      <%= link_to 'Send Invitation', invitations_create_path(ids: {id1: current_user.id, id2: user.id}) %>
+      <hr>
+        <% user.roles.each do |role| %>
+          <div class="badge badge-info">
+            <%= role.name %>
+          </div>
+        <% end %>
+        <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-yellow shiny' %>
+      <% end %>
+      <% if !Invitation.reacted?(current_user.id, user.id) && current_user != user %>
+        <%= link_to 'Send Invitation', invitations_create_path(ids: {id1: current_user.id, id2: user.id}) %>
     <% end %>
     </div>
   </div>

@@ -26,7 +26,7 @@ class EnrollmentsController < ApplicationController
   # POST /enrollments or /enrollments.json
   def create
     @enrollment = current_user.join_project(@project)
-    redirect_to project_path(@project), notice: "You are enrolled!"
+    redirect_to project_path(@project), notice: "You accepted the challenge!"
   end
 
   # PATCH/PUT /enrollments/1 or /enrollments/1.json
@@ -34,7 +34,7 @@ class EnrollmentsController < ApplicationController
     authorize @enrollment
     respond_to do |format|
       if @enrollment.update(enrollment_params)
-        format.html { redirect_to @enrollment, notice: "Enrollment was successfully updated." }
+        format.html { redirect_to @enrollment, notice: "Thank you for rating this challenge." }
         format.json { render :show, status: :ok, location: @enrollment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -48,7 +48,7 @@ class EnrollmentsController < ApplicationController
     authorize @enrollment
     @enrollment.destroy
     respond_to do |format|
-      format.html { redirect_to enrollments_url, notice: "Enrollment was successfully destroyed." }
+      format.html { redirect_to enrollments_url, notice: "Enrollment was successfully deleted." }
       format.json { head :no_content }
     end
   end

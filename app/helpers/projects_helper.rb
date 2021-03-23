@@ -2,14 +2,16 @@ module ProjectsHelper
   def enrollment_button(project)
     if current_user
       if !project.enrollments.where(user: current_user).any?
-        render "enrollments/enroll", project: project
+         form_tag project_enrollments_path(project) do
+           submit_tag "Join", class: 'btn shiny btn-success'
+         end 
       end
     end
   end
 
   def like_button(project)
     if current_user.liked? project
-      link_to "Unlike", like_project_path(project, "unlike"), class: "liked-btn btn shiny btn-maroon text-white", method: :put, remote: :true   
+      link_to "Unlike", like_project_path(project, "unlike"), class: "liked-btn btn shiny btn-maroon text-white", method: :put, remote: :true
     else
       link_to "Like", like_project_path(project, "like"), class: "like-btn btn shiny btn-maroon text-white", method: :put, remote: :true
     end
