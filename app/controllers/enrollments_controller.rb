@@ -1,5 +1,5 @@
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: %i[ show edit update destroy ]
+  before_action :set_enrollment, only: %i[ show edit update destroy complete uncomplete ]
   before_action :set_project, only: [:new, :create]
 
   # GET /enrollments or /enrollments.json
@@ -9,6 +9,24 @@ class EnrollmentsController < ApplicationController
     @pagy, @enrollments = pagy(@q.result.includes(:user))
   end
 
+  def incomplete
+    @ransack_path = incomplete_enrollments_path
+    @ransack_enrollments = Enrollment.incomplete.ransack(params[:enrollments_search], search_key: :enrollments_search)
+    @pagy, @enrollments = pagy(@ransack_enrollments.result.includes(:user))
+    render 'index'
+  end
+
+  def complete
+    authorize @enrollment, :edit?
+    @enrollment.update_attribute(:complete, true)
+    redirect_to request.referrer, notice: "Congratulations on completing the challenge!"
+  end
+
+  def uncomplete
+    authorize @enrollment, :edit?
+    @enrollment.update_attribute(:complete, false)
+    redirect_to request.referrer, notice: "Challenge marked as incomplete!"
+  end
 
   # GET /enrollments/1 or /enrollments/1.json
   def show
@@ -65,6 +83,6 @@ class EnrollmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def enrollment_params
-      params.require(:enrollment).permit(:rating, :review)
+      params.require(:enrollment).permit(:rating, :review, :complete)
     end
 end

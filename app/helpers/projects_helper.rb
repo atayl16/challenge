@@ -2,9 +2,9 @@ module ProjectsHelper
   def enrollment_button(project)
     if current_user
       if !project.enrollments.where(user: current_user).any?
-         form_tag project_enrollments_path(project) do
-           submit_tag "Join", class: 'btn shiny btn-success'
-         end
+        form_tag project_enrollments_path(project) do
+         submit_tag "Join", class: 'btn shiny btn-success'
+        end
       end
     end
   end

@@ -20,6 +20,17 @@ Rails.application.routes.draw do
   resources :projects do
     member do
       put "like" => "projects#like"
+      put "complete" => "projects#complete"
+    end
+  end
+  resources :enrollments do
+    member do
+      put "complete" => "enrollment#complete"
+    end
+    get :incomplete, on: :collection
+    member do
+      patch :complete
+      patch :uncomplete
     end
   end
 end

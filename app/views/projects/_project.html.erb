@@ -5,7 +5,7 @@
         <div class="h4">
           <div class="fa fa-trophy"></div>
           <%= link_to project.name, project_path(project) %><p></p>
-          <hr>          
+          <hr>
         </div>
         <em>Created by <%= link_to project.user.name, user_path(project.user) %>  <%= time_ago_in_words(project.created_at) %> ago</em>
         <p></p>
