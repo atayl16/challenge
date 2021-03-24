@@ -23,8 +23,7 @@ gem 'pagy', '~> 3.5'
 gem 'ancestry'
 gem 'acts_as_votable'
 gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
-
-
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -32,10 +31,10 @@ group :development, :test do
 end
 
 group :development do
-    gem 'web-console', '>= 4.1.0'
-      gem 'rack-mini-profiler', '~> 2.0'
+  gem 'web-console', '>= 4.1.0'
+  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
-    gem 'spring'
+  gem 'spring'
 end
 
 group :test do
