@@ -13,6 +13,8 @@
     <%= f.input :duration, label: false, placeholder: "Time Needed - 20 min, 3 days, etc" %>
     <%= f.label :requirements, label: "What is needed to complete the challenge?" %><br>
     <%= f.input :requirements, label: false, placeholder: "Requirements - What will users need to have" %>
+    <%= f.label :tags %><br>
+    <%= f.select :tag_ids, @tags.all.pluck(:name, :id), {}, { multiple: true, class: "selectize-tags" } %>
     <%= f.label :content, label: "Details" %><br>
     <%= f.rich_text_area :content, placeholder: "Challenge details", class: "form-control scrollable", id: f.object.object_id %>
   </div>

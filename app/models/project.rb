@@ -6,6 +6,8 @@ class Project < ApplicationRecord
   has_many :comments, as: :commentable
   acts_as_votable
   has_one_attached :avatar
+  has_many :project_tags, inverse_of: :project, dependent: :destroy
+  has_many :tags, through: :project_tags
 
 
   extend FriendlyId

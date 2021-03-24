@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy like ]
+  before_action :set_tags, only: [:index, :accepted, :pending_review, :created, :show, :edit, :update]
   respond_to :js, :html, :json
 
   def like
@@ -15,27 +16,27 @@ class ProjectsController < ApplicationController
   def index
     @ransack_path = projects_path
     @ransack_projects = Project.ransack(params[:projects_search], search_key: :projects_search)
-    @pagy, @projects = pagy(@ransack_projects.result.includes(:user).order(created_at: :desc))
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user, :project_tags, project_tags: :tag).order(created_at: :desc))
   end
 
   def accepted
     @ransack_path = accepted_projects_path
     @ransack_projects = Project.joins(:enrollments).where(enrollments: {user: current_user}).ransack(params[:projects_search], search_key: :projects_search)
-    @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user, :project_tags, project_tags: :tag))
     render 'index'
   end
 
   def pending_review
     @ransack_path = pending_review_projects_path
     @ransack_projects = Project.joins(:enrollments).merge(Enrollment.pending_review.where(user: current_user)).ransack(params[:projects_search], search_key: :projects_search)
-    @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user, :project_tags, project_tags: :tag))
     render 'index'
   end
 
   def created
     @ransack_path = created_projects_path
     @ransack_projects = Project.where(user: current_user).ransack(params[:projects_search], search_key: :projects_search)
-    @pagy, @projects = pagy(@ransack_projects.result.includes(:user))
+    @pagy, @projects = pagy(@ransack_projects.result.includes(:user, :project_tags, project_tags: :tag))
     render 'index'
   end
 
@@ -88,11 +89,15 @@ class ProjectsController < ApplicationController
   end
 
   private
+    def set_tags
+      @tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc)
+    end
+
     def set_project
       @project = Project.friendly.find(params[:id])
     end
 
     def project_params
-      params.require(:project).permit(:name, :requirements, :content, :user_id, :duration, :avatar)
+      params.require(:project).permit(:name, :requirements, :content, :user_id, :duration, :avatar, tag_ids: [])
     end
 end

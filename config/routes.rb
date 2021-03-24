@@ -33,4 +33,6 @@ Rails.application.routes.draw do
       patch :uncomplete
     end
   end
+  resources :tags, only: [:create, :index, :destroy]
+
 end

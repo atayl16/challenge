@@ -48,4 +48,13 @@
       <%= delete_project_button(project) %>
     </div>
   </div>
+    <% if project.tags.any? %>
+    <div class="card-footer">
+      <% project.tags.each do |tag| %>
+        <div class="badge badge-info">
+          <%= tag.name %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
