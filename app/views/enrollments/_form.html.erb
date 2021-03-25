@@ -3,7 +3,8 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <%= f.input :rating, label: " ", collection: 1..5, as: :radio_buttons %>
+  <%= f.input :complete, label: " ", as: :radio_buttons, collection: [[true, "Challenge complete!"], [false, "Still working on it..."]], label_method: :second, value_method: :first %><br>
 
-  <%= f.button :submit, "Submit Rating", class: "btn btn-info shiny" %>
+  <%= f.button :submit, "Save", class: "btn btn-info shiny" %>
 
 <% end %>

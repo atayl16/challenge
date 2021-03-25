@@ -29,6 +29,10 @@ class User < ApplicationRecord
     email
   end
 
+  ransacker :name_case_insensitive, type: :string do
+    arel_table[:name].lower
+  end
+
   def join_project(project)
     self.enrollments.create(project: project)
   end

@@ -1,6 +1,6 @@
 <div class="form-inline">
   <%= search_form_for @q do |f| %>
-    <%= f.search_field :email_or_name_eq, placeholder: 'Email or Name' %>
+    <%= f.search_field :email_or_name_case_insensitive_cont, placeholder: 'Email or Name' %>
     <%= f.button :submit, class: "btn btn-sm shiny" do%>
     <div class="fa fa-search"></div>
     Search
