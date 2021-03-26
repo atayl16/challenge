@@ -17,12 +17,14 @@ class ProjectsController < ApplicationController
     @ransack_path = projects_path
     @ransack_projects = Project.ransack(params[:projects_search], search_key: :projects_search)
     @pagy, @projects = pagy(@ransack_projects.result.includes(:user, :project_tags, project_tags: :tag).order(created_at: :desc))
+    @tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc)
   end
 
   def accepted
     @ransack_path = accepted_projects_path
     @ransack_projects = Project.joins(:enrollments).where(enrollments: {user: current_user}).ransack(params[:projects_search], search_key: :projects_search)
     @pagy, @projects = pagy(@ransack_projects.result.includes(:user, :project_tags, project_tags: :tag))
+    @tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc)
     render 'index'
   end
 
@@ -30,6 +32,7 @@ class ProjectsController < ApplicationController
     @ransack_path = pending_review_projects_path
     @ransack_projects = Project.joins(:enrollments).merge(Enrollment.pending_review.where(user: current_user)).ransack(params[:projects_search], search_key: :projects_search)
     @pagy, @projects = pagy(@ransack_projects.result.includes(:user, :project_tags, project_tags: :tag))
+    @tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc)
     render 'index'
   end
 
@@ -37,6 +40,7 @@ class ProjectsController < ApplicationController
     @ransack_path = created_projects_path
     @ransack_projects = Project.where(user: current_user).ransack(params[:projects_search], search_key: :projects_search)
     @pagy, @projects = pagy(@ransack_projects.result.includes(:user, :project_tags, project_tags: :tag))
+    @tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc)
     render 'index'
   end
 

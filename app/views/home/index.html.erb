@@ -32,6 +32,27 @@
       <div class="row mt-1"></div>
     <% end %>
 </div>
+<hr/>
+<div class="card">
+  <div class="card-body">
+    <h4>
+      <div class="fa fa-tags"></div>
+      Popular Interests
+    </h4>
+    <% @popular_tags.each do |tag| %>
+      <%= link_to projects_path(projects_search: {project_tags_tag_id_eq: tag.id}) do %>
+      <div class="badge badge-info">
+        <%= tag.name %>
+        <span class="badge badge-light">
+          <%= tag.project_tags_count %>
+        </span>
+      </div>
+      <% end %>
+    <% end %>
+    <p></p>
+  </div>
+</div>
+<br>
 <div class="card-group">
   <div class="card card-body">
     <h1>
@@ -70,27 +91,27 @@
   </div>
 </div>
 <hr/>
-<h2>
+<h4>
   Popular challenges
-</h2>
+</h4>
 <div class="card-columns">
   <% @popular_projects.each do |project| %>
     <%= render 'projects/project', project: project %>
   <% end %>
 </div>
 <hr/>
-<h2>
+<h4>
   Top rated challenges
-</h2>
+</h4>
 <div class="card-columns">
   <% @best_projects.each do |project| %>
     <%= render 'projects/project', project: project %>
   <% end %>
 </div>
 <hr/>
-<h2>
+<h4>
   Latest challenges
-</h2>
+</h4>
 <div class="card-columns">
   <% @latest_projects.each do |project| %>
     <%= render 'projects/project', project: project %>

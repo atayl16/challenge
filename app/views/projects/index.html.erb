@@ -27,6 +27,18 @@
       <div class="card-footer">
         <%= link_to '+ New Challenge', new_project_path %>
       </div>
+      <div class="card-footer">
+        <% @tags.each do |tag| %>
+          <%= link_to controller: controller_name, action: action_name, courses_search: {course_tags_tag_id_eq: tag.id} do %>
+            <div class="badge badge-info">
+              <%= tag.name %>
+              <span class="badge badge-light">
+                <%= tag.course_tags_count %>
+              </span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="col-md-10">

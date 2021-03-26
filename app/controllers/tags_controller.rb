@@ -2,8 +2,8 @@ class TagsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    # @tags = Tag.all.includes(:projects).where(projects: {approved: true, published: true}).order(project_tags_count: :desc) #tags for only published projects
-    @tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc) # display only used tags
+    @tags = Tag.all.order(project_tags_count: :desc)
+    authorize @tags
   end
 
   def create
