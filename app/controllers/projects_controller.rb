@@ -49,6 +49,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc)
   end
 
   def edit
