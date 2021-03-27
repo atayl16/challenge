@@ -42,11 +42,10 @@
   </div>
   <div class="card-footer">
     <div class="btn-group">
-      <%= enrollment_button(project) %>
       <%= like_button(project) %>
-      <%= review_button(project) %>
-      <%= edit_project_button(project) %>
-      <%= delete_project_button(project) %>
+    </div>
+    <div class="btn-group">
+      <%= enrollment_button(project) %>
     </div>
   </div>
     <% if project.tags.any? %>

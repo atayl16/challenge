@@ -3,10 +3,10 @@ module ProjectsHelper
     if current_user
       if !project.enrollments.where(user: current_user).any?
         form_tag project_enrollments_path(project) do
-         submit_tag "Join", class: 'btn shiny btn-success'
+         submit_tag "Join", class: 'btn shiny btn-palegreen'
         end
       else
-        link_to 'Leave Challenge', enrollment_path(project.enrollments.where(user: current_user).first), class: 'btn shiny btn-success', method: :delete, data: { confirm: 'Are you sure you want to leave this challenge?' }
+        link_to 'Leave Challenge', enrollment_path(project.enrollments.where(user: current_user).first), class: 'btn shiny btn-palegreen', method: :delete, data: { confirm: 'Are you sure you want to leave this challenge?' }
       end
     end
   end
@@ -42,9 +42,9 @@ module ProjectsHelper
     if current_user
       if user_project.any?
         if user_project.pending_review.any?
-          link_to 'Rate Challenge', edit_enrollment_path(user_project.first), class: 'btn btn-blue shiny text-white'
+          button_to 'Rate Challenge', edit_enrollment_path(user_project.first), method: :get,  :class => 'btn btn-blue shiny text-white'
         else
-          link_to 'Change Rating', edit_enrollment_path(user_project.first), class: 'btn btn-blue shiny text-white'
+          button_to 'Change Rating', edit_enrollment_path(user_project.first), method: :get, :class => 'btn btn-blue shiny text-white'
         end
       end
     end
