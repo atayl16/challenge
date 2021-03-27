@@ -24,6 +24,7 @@ gem 'ancestry'
 gem 'acts_as_votable'
 gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
 gem "aws-sdk-s3", require: false
+gem 'social-share-button'
 
 group :development, :test do
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

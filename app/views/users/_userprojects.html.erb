@@ -1,0 +1,28 @@
+<table class="table table-bordered table-striped table-sm table-hover">
+  <thead>
+    <tr>
+      <th>
+        Challenge
+      </th>
+      <th>
+        Rating
+      </th>
+      <th>Complete?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @enrollments.each do |enrollment| %>
+      <tr>
+        <td>
+          <%= link_to enrollment.project.name, project_path(enrollment.project) %>
+        </td>
+        <td>
+          <%= enrollment.rating %>
+        </td>
+        <td>
+          <%= enrollment.complete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

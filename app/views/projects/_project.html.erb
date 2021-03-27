@@ -38,13 +38,14 @@
   </div>
   <div class="card-body">
     <%= project.content %>
+     <!-- social_share_button_tag(project.name) -->
   </div>
   <div class="card-footer">
     <div class="btn-group">
+      <%= enrollment_button(project) %>
       <%= like_button(project) %>
       <%= review_button(project) %>
       <%= edit_project_button(project) %>
-      <%= enrollment_button(project) %>
       <%= delete_project_button(project) %>
     </div>
   </div>
@@ -52,7 +53,7 @@
     <div class="card-footer">
       <% project.tags.each do |tag| %>
         <div class="badge badge-info">
-          <%= tag.name %>
+          <%= tag.name.titleize %>
         </div>
       <% end %>
     </div>

@@ -66,9 +66,9 @@ class EnrollmentsController < ApplicationController
     authorize @enrollment
     @enrollment.destroy
     respond_to do |format|
-      format.html { redirect_to enrollments_url, notice: "Enrollment was successfully deleted." }
+      format.html { redirect_to request.referrer, notice: "You have left the challenge." }
       format.json { head :no_content }
-    end
+    end    
   end
 
   private

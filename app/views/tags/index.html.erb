@@ -4,14 +4,21 @@
     <%= @tags.count %>
   </div>
 </h3>
-<div class="card">
+<div class="card shadow">
   <div class="card-body">
     <% @tags.each do |tag| %>
       <div class="row"></div>
-      <%= tag.name %> used
-      <%= tag.project_tags_count  %> times
-      <br>
-      <%= link_to 'Destory', tag, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <div class="btn-group">
+        <%= link_to projects_path(projects_search: {project_tags_tag_id_eq: tag.id}), class: "btn shiny btn-palegreen mt-1" do %>
+          <%= tag.name.titleize %>
+          <div class="badge badge-light">
+            <%= tag.project_tags_count %>
+          </div>
+        <% end %>
+        <% if policy(tag).destroy? %>
+          <%= link_to 'Delete Tag', tag, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn shiny btn-magenta text-white mt-1" %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

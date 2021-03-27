@@ -1,13 +1,14 @@
+
 class TagsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, :only => [:index]
 
   def index
-    @tags = Tag.all.order(project_tags_count: :desc)
-    authorize @tags
+    @tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc)
   end
 
   def create
     @tag = Tag.new(tag_params)
+    @tag.name = @tag.name.titleize
     if @tag.save
       render json: @tag
     else
@@ -24,7 +25,7 @@ class TagsController < ApplicationController
 
   private
 
-  def tag_params
-    params.require(:tag).permit(:name)
-  end
+    def tag_params
+      params.require(:tag).permit(:name)
+    end
 end

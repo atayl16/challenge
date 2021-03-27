@@ -1,9 +1,30 @@
 <div class="container">
-  <%= render 'users/user', user: @user %>
+  <div class="row">
+    <div class="col-8">
+      <%= render 'users/user', user: @user %>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">
+          <h3>Challenges Accepted</h3>
+        </div>
+        <div class="card-body">
+          <%= render 'users/userprojects', user: @user %>
+        </div>
+      </div>
+    </div>
+  </div>
   <br>
-  <div class="card-group">
-    <div class="card card-body">
-    <%= render 'users/friends', user: @user %>
+  <div class="row">
+    <div class="col-8">
+      <div class="card-group">
+        <div class="card card-body">
+          <%= render 'users/friends', user: @user %>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <%= render 'users/invites', user: @user %>
     </div>
   </div>
 </div>

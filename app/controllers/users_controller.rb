@@ -1,29 +1,20 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show]
+  before_action :set_user, only: [:edit, :update, :show ]
 
   def index
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true)
     @pagy, @users = pagy(@q.result(distinct: true).order(created_at: :desc))
     @popular_tags = Tag.all.where.not(project_tags_count: 0).order(project_tags_count: :desc).limit(10)
-
   end
 
   def show
+    @enrollments = Enrollment.where(user: @user).all
+
   end
 
   def edit
     authorize @user
-  end
-
-  def dashboard
-    @user = current_user
-    @enrollments = Enrollment.all.where(user: current_user)
-    @latest_project = Project.latest.limit(1)
-    @best_project = Project.best.limit(1)
-    @popular_project = Project.popular.limit(1)
-    @created_projects = Project.where(user: current_user).limit(5)
-    @project = Project.new
   end
 
   def update

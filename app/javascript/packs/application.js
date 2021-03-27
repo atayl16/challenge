@@ -21,6 +21,8 @@ import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/css/all"
 import "@fortawesome/fontawesome-free/js/all"
 require("selectize")
+require('packs/social-share-button.js.erb')
+
 
 console.log('Hello World from Webpacker')
 
